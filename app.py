@@ -1,12 +1,22 @@
 from chalice import Chalice
 
-app = Chalice(app_name='PfizerAWSWorkshopCICD')
+app = Chalice(app_name='PfizerAWSWorkshop')
 
+jsonContactUsDetail = {
+    'FN': 'Himanshu',
+    'LN': 'Vijay',
+    'EA': 'himanshu.vijay@xxx.com',
+    'OA': 'TCS-N6,Noida',
+    'PA': 'Greater Noida',
+}
 
 @app.route('/')
 def index():
-    return {'hello': 'world'}
+    return {'Hello !! ': 'Its Pfizer AWS Workshop.'}
 
+@app.route('/contactus/{detail}')
+def state_of_city(detail):
+    return {'Detail : ': jsonContactUsDetail[detail]}
 
 # The view function above will return {"hello": "world"}
 # whenever you make an HTTP GET request to '/'.
