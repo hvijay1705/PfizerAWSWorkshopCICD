@@ -24,9 +24,9 @@ script:
 
 #deploy:
 #  provider: script
-#  script: aws cloudformation deploy --template-file ./sam-packaged.yaml  --stack-name travisci-pfizer-stack  --capabilities CAPABILITY_IAM
-#  skip_cleanup: true
 #  region: us-east-1
+#  script: aws cloudformation deploy --template-file C:\Users\travis\build\hvijay1705\PfizerAWSWorkshopCICD\packaged\sam-packaged.yaml --stack-name travisci-pfizer-stack  --capabilities CAPABILITY_IAM
+#  skip_cleanup: true
 #  on:
 #    branch: master
 
