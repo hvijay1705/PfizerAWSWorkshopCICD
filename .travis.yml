@@ -14,12 +14,17 @@ install:
 - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
 - pip install awscli
 - pip install aws-sam-cli
+- pip install chalice
+- pip install virtualenv
 script:
-- sam validate
-- sam package --template-file template.yaml --s3-bucket travisci-pfizer-aws-workshop-bucket --output-template-file packaged.yaml
+- chalice package packaged/
+- ls packaged/
+- cd packaged/
+- aws s3 mb s3://travisci-pfizer-aws-workshop-bucket/ --region us-west-1
+- aws cloudformation package --template-file ./sam.json  --s3-bucket travisci-pfizer-aws-workshop-bucket  --output-template-file sam-packaged.yaml
 deploy:
   provider: script
-  script: sam deploy --template-file packaged.yaml --stack-name travisci-pfizer-stack
+  script: aws cloudformation deploy --template-file ./sam-packaged.yaml  --stack-name travisci-chalice-pfizer-stack  --capabilities CAPABILITY_IAM
   skip_cleanup: true
   on:
     branch: master
