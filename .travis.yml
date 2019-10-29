@@ -20,11 +20,11 @@ script:
 - chalice package packaged/
 - ls packaged/
 - cd packaged/
-- aws s3 mb s3://travisci-pfizer-aws-workshop-bucket/ --region us-west-1
-- aws cloudformation package --template-file ./sam.json  --s3-bucket travisci-pfizer-aws-workshop-bucket  --output-template-file sam-packaged.yaml
+#- aws s3 mb s3://travisci-pfizer-aws-workshop-bucket/ --region us-east-1
+- aws cloudformation package --template-file ./sam.json  --s3-bucket travisci-pfizer-bucket  --output-template-file sam-packaged.yaml
 deploy:
   provider: script
-  script: aws cloudformation deploy --template-file ./sam-packaged.yaml  --stack-name travisci-chalice-pfizer-stack  --capabilities CAPABILITY_IAM
+  script: aws cloudformation deploy --template-file ./sam-packaged.yaml  --stack-name travisci-pfizer-stack  --capabilities CAPABILITY_IAM
   skip_cleanup: true
   on:
     branch: master
