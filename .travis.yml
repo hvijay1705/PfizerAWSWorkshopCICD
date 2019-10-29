@@ -22,13 +22,13 @@ script:
 - cd packaged/
 - aws cloudformation package --template-file ./sam.json  --s3-bucket travisci-pfizer-bucket  --output-template-file sam-packaged.yaml
 
-#deploy:
-#  provider: script
-#  region: us-east-1
-#  script: aws cloudformation deploy --template-file C:\Users\travis\build\hvijay1705\PfizerAWSWorkshopCICD\packaged\sam-packaged.yaml --stack-name travisci-pfizer-stack  --capabilities CAPABILITY_IAM
-#  skip_cleanup: true
-#  on:
-#    branch: master
+deploy:
+  provider: script
+  region: us-east-1
+  script: aws cloudformation deploy --template-file C:\Users\travis\build\hvijay1705\PfizerAWSWorkshopCICD\packaged\sam-packaged.yaml --stack-name travisci-pfizer-stack  --capabilities CAPABILITY_IAM
+  skip_cleanup: true
+  on:
+    branch: master
 
 notifications:
   email:
